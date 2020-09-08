@@ -17,24 +17,24 @@ The length of input array is a positive integer and will not exceed 10,000
 	 */
 
 	private static int findMaxConsecutiveOnes(int[] nums) {
-        if(nums.length ==1 && nums[0] == 1) return 1;
-        int count = 0;
-        for(int i = 0; i< nums.length -1; i++){
-            if(nums[i] == 1 ) {
-                count++;
-                if(nums[i+1] == 1){
-                   count++; 
-                }else{
-                    count--;
-                }
-                
-            }
-        }
-        return count;
+		 int length = nums.length;
+	        int max = 0;
+	        int count = 0;
+	        for(int i = 0; i < length; i++){
+	            if(nums[i] == 1){
+	                count++;
+	            }else{
+	                   count = 0;    
+	            }
+	          
+	            if(max < count) max = count;
+	        }
+	        return max;
     }
+    
 	public static void main(String[] args) {
 		
-		System.out.println(findMaxConsecutiveOnes(new int[] {1,1,0,1,1,1})); // 3
+		System.out.println(findMaxConsecutiveOnes(new int[] {1,0,1,1,0,1})); // 2
 	}
 
 }
