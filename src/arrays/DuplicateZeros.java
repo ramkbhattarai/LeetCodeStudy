@@ -39,13 +39,11 @@ public class DuplicateZeros {
         for(int i = 0; i< arr.length -1;i++){
             if(arr[i] == 0){
                 shift(arr, i+1, arr.length -2);
-                i+=2;
+                i+=1;
             }
             
         }
-        for(int i: arr) {
-        	System.out.print(i + " , ");
-        }
+        
         
     }
 
