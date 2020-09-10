@@ -40,15 +40,10 @@ for (int i = 0; i < len; i++) {
 
 public class RemoveDuplicatesFromSortedArray {
     public static void remove(int[] nums, int index, int length){ 
-    	System.out.println(length + " len , " + index + " index ");
         for(int i = index +1; i < length; i++){
             nums[i -1] = nums[i];
         }
-        
-        for(int i: nums) {
-        	System.out.print(i + " , ");
-        }
-        System.out.println();
+
     }
     
     public static int count(int[] nums, int val) {
@@ -61,16 +56,15 @@ public class RemoveDuplicatesFromSortedArray {
 
 public static int removeDuplicates(int[] nums) {
     int capacity = nums.length;
-    int len = capacity;
-    for(int i = 0; i< capacity; i++) {
+    int len = 0;
+    for(int i = 0; i< capacity - 1; i++) {
     	int val = nums[i];
     	int count = count(nums, val);
-    	if(count > 1) {
+    	if(count > 1 && val == nums[i+1]) {
     		for(int j=0; j < count -1; j++) {
     			remove(nums, i + j, capacity);
-        		len--;
+        		len++;
     		}
-    		
     	}
     	
     }
