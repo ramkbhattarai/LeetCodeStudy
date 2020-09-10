@@ -48,11 +48,6 @@ public class RemoveElement {
             for(int i = index +1; i < length; i++){
                 nums[i -1] = nums[i];
             }
-            for(int i: nums) {
-            	System.out.print(i + " , ");
-            }
-            System.out.println();
-            
     }
     public static int indexOf(int[]nums, int val){
         for(int i = 0; i < nums.length; i++){
@@ -67,6 +62,7 @@ public class RemoveElement {
            if(i == val) count++;
        }
         return count;
+        
     }
     public static int removeElement(int[] nums, int val) { 
     	int count = count(nums, val);
