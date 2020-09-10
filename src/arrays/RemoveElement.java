@@ -44,13 +44,15 @@ for (int i = 0; i < len; i++) {
 
 public class RemoveElement {
 	
-    public static void remove(int[] nums, int index, int length){
-        for(int i = index +1; i < length; i++){
-
-            nums[i -1] = nums[i];
-
-        }
-
+    public static void remove(int[] nums, int index, int length){    	
+            for(int i = index +1; i < length; i++){
+                nums[i -1] = nums[i];
+            }
+            for(int i: nums) {
+            	System.out.print(i + " , ");
+            }
+            System.out.println();
+            
     }
     public static int indexOf(int[]nums, int val){
         for(int i = 0; i < nums.length; i++){
@@ -58,24 +60,37 @@ public class RemoveElement {
         }
         return -1;
     }
+    
+    public static int count(int[]nums, int val){
+        int count = 0;
+       for(int i : nums){
+           if(i == val) count++;
+       }
+        return count;
+    }
     public static int removeElement(int[] nums, int val) { 
-    	int length = nums.length;
-        if(indexOf(nums,val) == -1) return length;
-        int len = length;
-        for(int i = 0; i < length; i++){
-            int index = indexOf(nums, val);
-           
-            remove(nums, index, len);
-            len--;
-            
-           
+    	int count = count(nums, val);
+        int capacity = nums.length;
+        if(count == 0) return capacity;
+        int len = capacity - count;
+        int index = 0;
+        int length = capacity;
+        for(int i = 0; i <= len; i++){
+             index = indexOf(nums, val);
+            if(indexOf(nums,val) != -1) {            	
+            	remove(nums, index, length);
+                length--;
+            }   
         }
         return len;
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		removeElement(new int[] {3,2,2,3}, 3); //[2,2]
+
+	int x = removeElement(new int[] {2,2,3}, 2); //[2,2]  [0,1,2,2,3,0,4,2]
+
+	System.out.println(x);
+	
 
 	}
 
