@@ -39,40 +39,47 @@ for (int i = 0; i < len; i++) {
  */
 
 public class RemoveDuplicatesFromSortedArray {
-    public static void remove(int[] nums, int index, int length){ 
-        for(int i = index +1; i < length; i++){
-            nums[i -1] = nums[i];
-        }
+	public static void remove(int[] nums, int index, int length){ 
+		for(int i = index +1; i < length; i++){
+			nums[i -1] = nums[i];
+		}
+//		System.out.println("removed index = "+ index);
+	}
 
-    }
-    
-    public static int count(int[] nums, int val) {
-    	int count = 0;
-    	for(int i : nums) {
-    		if(i == val) count++;
-    	}
-    	return count;
-    }
+	public static int count(int[] nums, int val) {
+		int count = 0;
+		for(int i : nums) {
+			if(i == val) count++;
+		}
+		return count;
+	}
 
-public static int removeDuplicates(int[] nums) {
-    int capacity = nums.length;
-    int len = 0;
-    for(int i = 0; i< capacity - 1; i++) {
-    	int val = nums[i];
-    	int count = count(nums, val);
-    	if(count > 1 && val == nums[i+1]) {
-    		for(int j=0; j < count -1; j++) {
-    			remove(nums, i + j, capacity);
-        		len++;
-    		}
-    	}
-    	
-    }
-    return len;
-}
+	public static int removeDuplicates(int[] nums) {
+		int capacity = nums.length;
+		if(capacity < 1) return 0;
+		if(capacity == 1) return 1;
+        int po = 0;
+        int pu = 0;
+       for(int i = 0; po < capacity; i++) {
+			int val = nums[i];
+			int count = count(nums, val);
+				if(count > 1) {
+					for(int j=0; j < count -1 && po < capacity; j++) {
+						remove(nums, i, capacity);
+						po++;
+					}
+					pu++;
+				}else{
+            
+                    pu++;
+                }
+           po++;    
+		}
+		return pu;
+	}
 
 	public static void main(String[] args) {
-		System.out.println(removeDuplicates(new int[] {1,1,2}));//[1,2]
+		System.out.println(removeDuplicates(new int[] {0,0,0,0,1,2,3,3,3,4}));//[1,2] [0,0,1,1,1,2,2,3,3,4] [0,0,0,0,1,2,3,3,3,4]
 	}
 
 }
