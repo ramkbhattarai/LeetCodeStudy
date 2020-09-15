@@ -43,7 +43,6 @@ public class RemoveDuplicatesFromSortedArray {
 		for(int i = index +1; i < length; i++){
 			nums[i -1] = nums[i];
 		}
-//		System.out.println("removed index = "+ index);
 	}
 
 	public static int count(int[] nums, int val) {
