@@ -22,32 +22,34 @@ Constraints:
 
 public class ReplaceWIthMaximumOnRight {
 	
-	public void replace(int[] arr, int index, int length){
-        for(int i = index +1; i < length; i++){
-            if(i == length){
+	public static void replace(int[] arr, int index, int length){
+        for(int i = index +1; i <= length; i++){
+            if(i == arr.length){
                 arr[i-1] = -1;
             }else{
                 arr[i -1] = arr[i];
             }
         }
     }
-    public int[] replaceElements(int[] arr) {
-        if(arr.length < 2) return arr;
-        int op = 0;
-        int maxCurrent = arr[0];
-        for(int i = 1; i < arr.length; i++){
-            if(maxCurrent >= arr[i]){
-                op++;
-                continue;
-            }else{
-                if(op < arr.length){
-                    replace(arr, i -1, arr.length);
-                    op++;
-                }
-
-            }
-        }
-        return arr;
+    public static int[] replaceElements(int[] arr) {
+    	 if(arr.length < 2) return new int[] {-1};
+         int curEle = arr[arr.length -1];
+         for(int i = arr.length -2; i >=0; i--){
+             if(curEle > arr[i]){
+                 arr[i] = curEle;
+             }else {
+            	 curEle = arr[i];
+             }
+            
+             if(i == 0){
+                 replace(arr, i, arr.length);
+             }
+         }
+         return arr;
     }
+    
+    public static void main(String[] args) {
+		replaceElements(new int[] {17,18,5,4,6,1});
+	}
 
 }
