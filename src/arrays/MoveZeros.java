@@ -15,20 +15,20 @@ Minimize the total number of operations.
  */
 
 public class MoveZeros {
-	
+
 	public void swap(int[] nums, int i, int j){
-        int temp = nums[j];
-        nums[j] = nums[i];
-        nums[i] = temp;
-}
-public void moveZeroes(int[] nums) {
-int writer = 0;
-for(int reader = 0; reader < nums.length; reader++){
-    if(nums[reader] != 0){
-        swap(nums, reader, writer);
-        writer++;
-    }
-}
-}
+		int temp = nums[j];
+		nums[j] = nums[i];
+		nums[i] = temp;
+	}
+	public void moveZeroes(int[] nums) {
+		int writer = 0;
+		for(int reader = 0; reader < nums.length; reader++){
+			if(nums[reader] != 0){
+				swap(nums, reader, writer);
+				writer++;
+			}
+		}
+	}
 
 }
