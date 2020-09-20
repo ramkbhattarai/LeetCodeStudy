@@ -42,50 +42,68 @@ At most 2000 calls will be made to get, addAtHead, addAtTail,  addAtIndex and de
  */
 
 public class ImplementLinkedList {
-	private int size = 0;
-    private Node head = null;
+	private int size; 
+    private Node head;
     
     public class Node{
         private int val;
         private Node next;
-        public Node(int val){this.val = val;}
+        public Node(int val){
+            this.val = val;
+            this.next = null;}
     }
 
     /** Initialize your data structure here. */
     public ImplementLinkedList() {
+        this.size = 0;
+        this.head = null;
     }
     
     /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
     public int get(int index) {
-        if(index < 0) return -1;
-        if(index >= size) return -1;
-        Node curr = this.head;
-        for(int i = 0; i < index; i++){
-            curr = curr.next;
-        }
+        if(index < 0 || index >= this.size) {
+            return -1;
+        } else{
+            Node curr = this.head;
+            for(int i = 0; i < index; i++){
+                curr = curr.next;
+            }
         return curr.val;
+        }
+        
     }
     
     /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
     public void addAtHead(int val) {
         Node curr = new Node(val);
-        curr.next = this.head;
-         this.head = curr;
+        if(this.head == null){
+            this.head = curr;
+        }else{
+             curr.next = this.head;
+            this.head = curr;
+        }
+       
         this.size++;
     }
     
     /** Append a node of value val to the last element of the linked list. */
     public void addAtTail(int val) {
         Node newNode = new Node(val);
-        Node curr = this.head;
+        if(this.head == null){
+            this.head = newNode;
+        }else{
+            Node curr = this.head;
         for(int i = 0; i < this.size; i++) curr = curr.next;
         curr.next = newNode;
+        }
+
         this.size++;
     }
     
+    
     /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
     public void addAtIndex(int index, int val) {
-        if(index > size || index < 0) return;
+        if(index > this.size || index < 0) return;
         if(index == 0){
             addAtHead(val);
         }else if(index == this.size){
@@ -94,22 +112,29 @@ public class ImplementLinkedList {
             Node curr = this.head;
             Node newNode = new Node(val);
             for(int i = 0; i < index -1; i++) curr = curr.next;
-            newNode.next = curr.next.next;
+            Node temp = curr.next;
+            newNode.next = temp;
             curr.next = newNode;
         }
         this.size++;
     }
     
+    
     /** Delete the index-th node in the linked list, if the index is valid. */
     public void deleteAtIndex(int index) {
         if(index > size || index < 0) return;
         if(index == 0){
+            if(this.head == null) return;
             Node curr = this.head;
              this.head = curr.next;
+            if(this.size == 0){
+                this.head = null;
+            }
         }else {
             Node curr = this.head;
             for(int i = 0; i < index -1; i++) curr = curr.next;
-            curr.next = null;
+            Node removed = curr.next;
+            curr.next = removed.next;
         }
         this.size--;
     }
