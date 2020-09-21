@@ -75,14 +75,16 @@ public class CheckCycle {
 	}
 	
 	public boolean hasCycle(ListNode head) {
+        if(head == null || head.next == null) return false;
         ListNode slow = head;
         ListNode fast = head;
-        int counter = 0;
-        while(counter < head.val){
+        
+        while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
+            if(slow == fast) return true;
         }
-        return slow.val == fast.val;
+        return false;
     }
 
 }
