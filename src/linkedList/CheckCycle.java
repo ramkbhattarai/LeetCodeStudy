@@ -1,4 +1,8 @@
 package linkedList;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Given head, the head of a linked list, determine if the linked list has a cycle in it.
 
@@ -54,6 +58,21 @@ pos is -1 or a valid index in the linked-list.
   }
  
 public class CheckCycle {
+	
+	
+	// using hashset  O(n) time and space
+	public boolean hasCycle1(ListNode head) {
+	    Set<ListNode> nodesSeen = new HashSet<>();
+	    while (head != null) {
+	        if (nodesSeen.contains(head)) {
+	            return true;
+	        } else {
+	            nodesSeen.add(head);
+	        }
+	        head = head.next;
+	    }
+	    return false;
+	}
 	
 	public boolean hasCycle(ListNode head) {
         ListNode slow = head;
