@@ -1,0 +1,138 @@
+package linkedList;
+/**
+ * Design your implementation of the linked list. You can choose to use a singly or doubly linked list.
+A node in a singly linked list should have two attributes: val and next. val is the value of the current node, and next is a pointer/reference to the next node.
+If you want to use the doubly linked list, you will need one more attribute prev to indicate the previous node in the linked list. Assume all nodes in the linked list are 0-indexed.
+
+Implement the MyLinkedList class:
+
+MyLinkedList() Initializes the MyLinkedList object.
+int get(int index) Get the value of the indexth node in the linked list. If the index is invalid, return -1.
+void addAtHead(int val) Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.
+void addAtTail(int val) Append a node of value val as the last element of the linked list.
+void addAtIndex(int index, int val) Add a node of value val before the indexth node in the linked list. If index equals the length of the linked list, the node will be appended to the end of the linked list. If index is greater than the length, the node will not be inserted.
+void deleteAtIndex(int index) Delete the indexth node in the linked list, if the index is valid.
+ * @author ramkrishnabhattarai
+ *
+ */
+
+public class ImplementDoublyLinkedList {
+	
+	 /** Initialize your data structure here. */
+    int length;
+    Node head;
+    class Node {
+        int val;
+        Node next;
+        Node prev;
+        Node(int x) {
+            this.val = x;
+        }    
+    }
+    
+    public ImplementDoublyLinkedList(){
+        this.length = 0;
+        this.head = null;
+    }
+    
+    
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    public int get(int index) {
+        if(index < 0 || index >= this.length) {
+            return -1;
+        }
+        else {
+            int counter = 0;
+            Node curr = head;
+            while(counter != (index)) {
+                curr = curr.next;
+                counter++;
+            }
+            return curr.val;
+        }
+        
+    }
+    
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    public void addAtHead(int val) {
+        Node newNode = new Node(val);
+        newNode.next = this.head;
+        this.head.prev = newNode;
+        this.head = newNode;
+        this.length++; 
+    }
+    
+    /** Append a node of value val to the last element of the linked list. */
+    public void addAtTail(int val) {
+        if(this.length == 0) {
+            addAtHead(val);
+            return;
+        }
+        Node newNode = new Node(val);
+        Node temp = head;
+        while(temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+        newNode.prev = temp;
+        this.length++;
+    }
+    
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    public void addAtIndex(int index, int val) {
+        Node newNode = new Node(val);
+        Node temp = head;
+        int counter = 0;
+        if((index) == this.length) {
+            addAtTail(val);
+            return;
+        }
+        if(index > this.length) {
+            return;
+        }
+        if(index == 0){
+            addAtHead(val);
+            return;
+        }
+        while(counter != (index -1)) {
+            temp = temp.next;
+            counter++;
+        }
+        newNode.prev = temp;
+        newNode.next = temp.next;
+        newNode.next.prev = newNode;
+        temp.next = newNode; 
+        this.length++;
+ 
+        
+    }
+    
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    public void deleteAtIndex(int index) {
+        
+        if(index < 0 || index >= this.length) {
+            return;
+        }
+        Node curr = head;
+        if(index == 0) {
+            head = curr.next;
+            head.prev = null;
+        }
+        else {
+                Node current = head;
+                Node pre = null;
+                int counter =0;
+                while(counter != index) {
+                    pre = current;
+                    current = current.next;
+                    counter++;
+                }
+                pre.next = current.next;
+                curr.next.prev = pre;
+               
+        }  
+         this.length--;
+    }
+
+
+}
