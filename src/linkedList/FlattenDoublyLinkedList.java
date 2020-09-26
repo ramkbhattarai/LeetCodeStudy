@@ -1,4 +1,7 @@
 package linkedList;
+
+import java.util.Stack;
+
 /**
  * You are given a doubly linked list which in addition to the next and previous pointers, it could have a child pointer, which may or may not point to a separate doubly linked list. These child lists may have one or more children of their own, and so on, to produce a multilevel data structure, as shown in the example below.
 
@@ -30,7 +33,15 @@ Output: []
  *
  */
 public class FlattenDoublyLinkedList {
+	class Node {
+	    public int val;
+	    public Node prev;
+	    public Node next;
+	    public Node child;
+	};
 	public Node flatten(Node head) {
+		
+		
         Stack<Node> stack = new Stack<>();
         Node currHead = head;
         Node currTail = head;
