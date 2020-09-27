@@ -63,4 +63,23 @@ public class RotatedList {
        return toBeShifted; 
     }
 	
+	// better approach
+	public ListNode rotateRight2(ListNode head, int k) {
+	// if(head==NULL||head->next==NULL)return head;
+    int count = 1;
+    ListNode cur = head;
+    while(cur.next != null){
+        cur=cur.next;
+        count++;
+    }
+    if(k%count==0)return head;
+    cur.next=head;//make a circle
+    k%=count;
+    for(int i=0;i<count-k;++i){
+        cur=cur.next;
+    }
+    head=cur.next;
+    cur.next=null;//untie the circle
+    return head;
+	}
 }
