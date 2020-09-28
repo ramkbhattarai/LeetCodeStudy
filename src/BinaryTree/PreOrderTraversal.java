@@ -60,6 +60,8 @@ public class PreOrderTraversal {
 		          this.right = right;
 		      }
 	}
+	
+	// iterative solution
 	public List<Integer> preorderTraversal(TreeNode root) {
 		List<Integer> list  = new ArrayList<>();
 		if(root == null) return list;
@@ -78,4 +80,19 @@ public class PreOrderTraversal {
         }
 		return list;
     }
+	
+	// recursive solution
+	
+    public List<Integer> dfs(TreeNode root, List<Integer> list) {
+    if(root == null) return list;
+        list.add(root.val);
+        list = dfs(root.left, list);
+   
+     return dfs(root.right, list);
+    }
+
+public List<Integer> preorderTraversal2(TreeNode root) {
+    return dfs(root, new ArrayList<Integer>());
+}
+	
 }
