@@ -2,6 +2,7 @@ package BinaryTree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import BinaryTree.PreOrderTraversal.TreeNode;
 
@@ -71,6 +72,25 @@ public class InorderTraversal {
     }
     public List<Integer> inorderTraversal(TreeNode root) {
         return dfs(root, new ArrayList<Integer>());
+    }
+    
+    // iterative solution
+    
+    public List<Integer> inorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if(root == null) return list;
+        TreeNode curr = root;
+        while(!stack.empty() || curr != null){
+            while(curr != null){
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            list.add(curr.val);
+            curr = curr.right;
+        }
+        return list;
     }
 
 }
