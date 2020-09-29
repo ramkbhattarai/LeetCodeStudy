@@ -60,7 +60,7 @@ public class InorderTraversal {
 	          this.left = left;
 	          this.right = right;
 	      }
-}
+	}
 	
 	// recursive
 	
